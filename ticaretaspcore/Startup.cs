@@ -28,8 +28,13 @@ namespace ticaretaspcore
         {
               services.AddRazorPages();
               services.AddMvcCore();
-              //services.AddControllersWithViews();
-             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+              services.AddSession(Options=> {
+                  Options.IdleTimeout = TimeSpan.FromMinutes(10);
+                  Options.Cookie.HttpOnly = true;
+                  Options.Cookie.IsEssential = true;
+              });
+            //services.AddControllersWithViews();
+            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
             {
                 options.LoginPath = new PathString("/Login/Index");
@@ -57,7 +62,7 @@ namespace ticaretaspcore
 
             app.UseAuthentication();
             app.UseRouting();
-
+            app.UseSession();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

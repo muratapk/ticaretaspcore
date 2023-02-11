@@ -27,7 +27,7 @@
                         <div class="btn_main">
                            <div class="buy_bt">
                               <ul>
-                                 <li class="active"><a href="#">Sepete Ekle</a></li>
+                                 <li id="addtoCart" data-id="@item.product_Id" class="active"><a href="#">Sepete Ekle</a></li>
                                  <li><a href="/Home/getProuct/@item.product_Id">Detay</a></li>
                               </ul>
                            </div>
@@ -192,7 +192,16 @@
               $("#getir").load("/Home/azalt");
             
             });
-       
+           var products = [];
+           $("#addtoCart").click(function () {
+               var productID = $(this).attr('data-id');
+               alert(productID);
+               products.push(productID);
+              
+               Cookies.set("CardProducts", productID.join("-"),{ path: '/' });
+               $.cookie("CardProducts", productID.join("-"),{ path: '/' });
+
+           });
        
        });
      </script>

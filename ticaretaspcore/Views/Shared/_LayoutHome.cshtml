@@ -1,4 +1,8 @@
-﻿
+﻿@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAcccesor
+@using ticaretaspcore.Utility
+@using ticaretaspcore.Models
+@using ticaretaspcore 
 @{
     Layout = null;
 }
@@ -57,7 +61,19 @@
                   <div class="login_text">
                      <ul>
                         <li><a href="#"><img src="images/user-icon.png"></a></li>
-                        <li><a href="#"><img src="images/bag-icon.png"></a></li>
+                        <li>
+                         @if(HttpContextAcccesor.HttpContext.Session.Get<List<ShoppingCart>>(WC.SessionCart)!=null)
+                             {
+                              <a asp-action="Index" asp-controller="Cart">
+                                  @{ 
+                                      var count = HttpContextAcccesor.HttpContext.Session.Get<List<ShoppingCart>>(WC.SessionCart).Count;
+                                  }
+                              </a>
+                                      }
+                         <a href="#"><img src="images/bag-icon.png"></a>
+                        
+                        
+                        </li>
                         <li><a href="#"><img src="images/search-icon.png"></a></li>
                      </ul>
                   </div>

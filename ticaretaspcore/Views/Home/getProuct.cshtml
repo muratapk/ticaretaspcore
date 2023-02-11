@@ -4,18 +4,20 @@
     Layout = "~/Views/Shared/_LayoutHome.cshtml";
 }
 
-<h1>getProuct</h1>
+
+
 <div class="contact_section layout_padding">
          <div class="container">
             <div class="row">
                <div class="col-md-6">
-                  <h1 class="contact_taital">Get In Touch</h1>
-                  <p class="contact_text">Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation  eu </p>
+                  <h1 class="contact_taital">@Model.product_Name</h1>
+                  <p class="contact_text">@Model.product_Stock </p>
+                  <img src="images/@Model.product_Picture" width="100" height="100"/>
                </div>
                <div class="col-md-6">
                   <div class="contact_main">
-                     <div class="contact_bt"><a href="#">Contact Form</a></div>
-                     <div class="newletter_bt"><a href="#">Newletter</a></div>
+                     <div class="contact_bt"><a href="#">Tümü Göster</a></div>
+                     <div class="newletter_bt"><a href="#">Sepet</a></div>
                   </div>
                </div>
             </div>

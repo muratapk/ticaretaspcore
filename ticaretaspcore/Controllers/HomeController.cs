@@ -23,9 +23,27 @@ namespace ticaretaspcore.Controllers
             var sorgu = await _context.Products.Where(x => x.product_Id == id).FirstOrDefaultAsync();
             return View(sorgu);
         }
-        public PartialViewResult PartialOurProduct()
+        public async Task<IActionResult> PartialOurProduct()
         {
-            var sorgu = _context.Products.ToListAsync();
+            var sorgu =await _context.Products.ToListAsync();
+            return PartialView("_PartialOurProduct", sorgu);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Details(string arama)
+        {
+            var sorgu = await _context.Products.Where(x => x.product_Name.Contains(arama)).ToListAsync();
+            return View(sorgu);
+        }
+
+        public async Task<IActionResult> artir()
+        {
+            var sorgu= await _context.Products.OrderBy(x => x.product_Name).ToListAsync();
+            return PartialView("_PartialOurProduct", sorgu);
+        }
+
+        public async Task<IActionResult> azalt()
+        {
+            var sorgu = await _context.Products.OrderByDescending(x => x.product_Name).ToListAsync();
             return PartialView("_PartialOurProduct", sorgu);
         }
     }
